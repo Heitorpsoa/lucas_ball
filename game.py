@@ -1,4 +1,5 @@
 import pygame
+from pygame.constants import K_UP
 from ball import Ball
 
 pygame.init()
@@ -16,6 +17,9 @@ is_running = True
 
 b = Ball([20, 50])
 
+FPS = 30
+clock = pygame.time.Clock()
+
 while is_running:
 
     window_surface.blit(background, (0, 0))
@@ -30,11 +34,15 @@ while is_running:
 
     keys = pygame.key.get_pressed()
 
+    if keys[pygame.K_UP]:
+        b.jump()
+    
     if keys[pygame.K_RIGHT]:
-        b.move([0.00001, 0])
+        b.move([0.000001, 0])
     elif keys[pygame.K_LEFT]:
-        b.move([-0.00001, 0])
+        b.move([-0.000001, 0])
     else:
         b.reset()
 
     pygame.display.update()
+clock.tick(FPS)
